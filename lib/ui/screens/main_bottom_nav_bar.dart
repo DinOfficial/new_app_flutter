@@ -19,17 +19,47 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // App Bar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: SvgPicture.asset('assets/images/Logo.svg',height: 20,width: 36,),
+        title: SvgPicture.asset('assets/images/Logo.svg', height: 20, width: 36),
         centerTitle: true,
-        actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.account_circle_outlined))
-        ],
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.account_circle_outlined))],
       ),
-      drawer: Drawer() ,
+
+      // SideBar // Drawer
+      drawer: NavigationDrawer(
+          backgroundColor: Color(0xff001F28),
+        children: [
+              Container(
+                height: 80,
+                padding: const EdgeInsets.all(16.0), // Padding inside the container
+                alignment: Alignment.centerLeft, // This aligns the child (image) to the left
+                child: SvgPicture.asset(
+                  'assets/images/Logo.svg',
+                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  width: 170,
+                ),
+              ),
+              Divider(thickness: .4, color: Colors.grey.shade800),
+              ListTile(
+                title: Text('SECTIONS', style: TextStyle(color: Colors.green.withOpacity(.7), fontSize: 20)),
+              ),
+              ListTile(
+                title: Text('Top Stories', style: TextStyle(color: Colors.white.withOpacity(.7), fontSize: 20)),
+              ),
+              ListTile(
+                hoverColor: Colors.green.withOpacity(.4) ,
+                title: Text('Top Stories', style: TextStyle(color: Colors.white, fontSize: 20)),
+              ),
+        ]
+      ),
+
+      // Main Body
       body: _pages[_currentIndex],
-      bottomNavigationBar:BottomNavigationBar(
+
+      // Main Bottom Navigation Bar
+      bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color(0xff001F28),
         currentIndex: _currentIndex,
         onTap: (int index) {
@@ -38,21 +68,15 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
         },
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white60,
-        items: <BottomNavigationBarItem> [
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            activeIcon: SvgPicture.asset(
-              'assets/icons/home_24px.svg',
-              color: Colors.white,
-            ),
-            icon: SvgPicture.asset('assets/icons/home_outline_24px.svg', color: Colors.white60,),
-            label:'Home',
+            activeIcon: SvgPicture.asset('assets/icons/home_24px.svg', color: Colors.white),
+            icon: SvgPicture.asset('assets/icons/home_outline_24px.svg', color: Colors.white60),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
-            activeIcon: SvgPicture.asset(
-              'assets/icons/search_24px.svg',
-              color: Colors.white,
-            ),
-            icon: SvgPicture.asset('assets/icons/search_24px.svg',color: Colors.white60),
+            activeIcon: SvgPicture.asset('assets/icons/search_24px.svg', color: Colors.white),
+            icon: SvgPicture.asset('assets/icons/search_24px.svg', color: Colors.white60),
             label: 'Search',
           ),
         ],
