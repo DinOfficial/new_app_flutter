@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
+
   final String name = 'search-page';
 
   @override
@@ -11,6 +12,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Search Page')));
+    return Center(child: Text('Search Page'));
   }
 }

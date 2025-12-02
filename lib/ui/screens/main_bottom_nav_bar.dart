@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:the_daily_globe/ui/screens/home_screen.dart';
 import 'package:the_daily_globe/ui/screens/search_screen.dart';
+import 'package:the_daily_globe/ui/widgets/dg_app_bar.dart';
 
 import '../widgets/dg_navigation_drawer.dart';
 
@@ -21,13 +22,12 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      // SideBar // Drawer
-      drawer: DGNavigationDrawer(),
-
+      appBar: DGAppBar(),
       // Main Body
       body: _pages[_currentIndex],
 
+      // SideBar // Drawer
+      drawer: DGNavigationDrawer(),
       // Main Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color(0xff001F28),

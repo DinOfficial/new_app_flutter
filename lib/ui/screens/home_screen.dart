@@ -54,34 +54,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: SvgPicture.asset('assets/images/Logo.svg', height: 20, width: 36),
-        centerTitle: true,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.account_circle_outlined))],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12),
-            child: TabBar(
-              controller: _tabController,
-              dividerHeight: 0,
-              labelColor: Colors.blueGrey,
-              unselectedLabelColor: Colors.grey,
-              isScrollable: true,
-              tabAlignment: TabAlignment.start,
-              indicatorColor: Colors.blueGrey,
-              tabs: _tabBar.map((String name) => Tab(child: Text(name))).toList(),
-            ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 12, right: 12),
+          child: TabBar(
+            controller: _tabController,
+            dividerHeight: 0,
+            labelColor: Colors.blueGrey,
+            unselectedLabelColor: Colors.grey,
+            isScrollable: true,
+            tabAlignment: TabAlignment.start,
+            indicatorColor: Colors.blueGrey,
+            tabs: _tabBar.map((String name) => Tab(child: Text(name))).toList(),
           ),
-          Expanded(
-            child: TabBarView(controller: _tabController, children: _screen),
-          ),
-        ],
-      ),
-      drawer: DGNavigationDrawer(),
+        ),
+        Expanded(
+          child: TabBarView(controller: _tabController, children: _screen),
+        ),
+      ],
     );
   }
 }

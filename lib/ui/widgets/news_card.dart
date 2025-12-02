@@ -9,7 +9,7 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 400,
+      height: 420,
       margin: EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         border: BoxBorder.all(color: Colors.blueGrey, width: 2),
