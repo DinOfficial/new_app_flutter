@@ -63,15 +63,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       body: Column(
         children: [
-          TabBar(
-            controller: _tabController,
-            dividerHeight: 0,
-            labelColor: Colors.blueGrey,
-            unselectedLabelColor: Colors.grey,
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
-            indicatorColor: Colors.blueGrey,
-            tabs: _tabBar.map((String name) => Tab(child: Text(name))).toList(),
+          Padding(
+            padding: const EdgeInsets.only(left: 12, right: 12),
+            child: TabBar(
+              controller: _tabController,
+              dividerHeight: 0,
+              labelColor: Colors.blueGrey,
+              unselectedLabelColor: Colors.grey,
+              isScrollable: true,
+              tabAlignment: TabAlignment.start,
+              indicatorColor: Colors.blueGrey,
+              tabs: _tabBar.map((String name) => Tab(child: Text(name))).toList(),
+            ),
           ),
           Expanded(
             child: TabBarView(controller: _tabController, children: _screen),
