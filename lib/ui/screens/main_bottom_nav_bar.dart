@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:the_daily_globe/ui/screens/home_screen.dart';
 import 'package:the_daily_globe/ui/screens/search_screen.dart';
 
+import '../widget/dg_app_bar.dart';
+
 class MainBottomNavBar extends StatefulWidget {
   const MainBottomNavBar({super.key});
 
@@ -20,39 +22,40 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       // App Bar
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: SvgPicture.asset('assets/images/Logo.svg', height: 20, width: 36),
-        centerTitle: true,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.account_circle_outlined))],
-      ),
+      appBar: DGAppBar(),
 
       // SideBar // Drawer
       drawer: NavigationDrawer(
-          backgroundColor: Color(0xff001F28),
+        backgroundColor: Color(0xff001F28),
         children: [
-              Container(
-                height: 80,
-                padding: const EdgeInsets.all(16.0), // Padding inside the container
-                alignment: Alignment.centerLeft, // This aligns the child (image) to the left
-                child: SvgPicture.asset(
-                  'assets/images/Logo.svg',
-                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                  width: 170,
-                ),
-              ),
-              Divider(thickness: .4, color: Colors.grey.shade800),
-              ListTile(
-                title: Text('SECTIONS', style: TextStyle(color: Colors.green.withOpacity(.7), fontSize: 20)),
-              ),
-              ListTile(
-                title: Text('Top Stories', style: TextStyle(color: Colors.white.withOpacity(.7), fontSize: 20)),
-              ),
-              ListTile(
-                hoverColor: Colors.green.withOpacity(.4) ,
-                title: Text('Top Stories', style: TextStyle(color: Colors.white, fontSize: 20)),
-              ),
-        ]
+          Container(
+            height: 80,
+            padding: const EdgeInsets.all(16.0), // Padding inside the container
+            alignment: Alignment.centerLeft, // This aligns the child (image) to the left
+            child: SvgPicture.asset(
+              'assets/images/Logo.svg',
+              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+              width: 170,
+            ),
+          ),
+          Divider(thickness: .4, color: Colors.grey.shade800),
+          ListTile(
+            title: Text(
+              'SECTIONS',
+              style: TextStyle(color: Colors.green.withOpacity(.7), fontSize: 20),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              'Top Stories',
+              style: TextStyle(color: Colors.white.withOpacity(.7), fontSize: 20),
+            ),
+          ),
+          ListTile(
+            hoverColor: Colors.green.withOpacity(.4),
+            title: Text('Top Stories', style: TextStyle(color: Colors.white, fontSize: 20)),
+          ),
+        ],
       ),
 
       // Main Body
@@ -84,3 +87,5 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
     );
   }
 }
+
+
