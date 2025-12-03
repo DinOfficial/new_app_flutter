@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:the_daily_globe/ui/widgets/dg_navigation_drawer.dart';
-
 class DGAppBar extends StatelessWidget implements PreferredSizeWidget{
   const DGAppBar({super.key});
 

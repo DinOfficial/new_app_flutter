@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:the_daily_globe/data/models/categories_model.dart';
+import 'package:the_daily_globe/data/services/network_caller.dart';
+import 'package:the_daily_globe/data/utils/urls.dart';
+import 'package:the_daily_globe/ui/widgets/show_snackbar_message.dart';
 
 import '../widgets/news_card.dart';
 
@@ -10,9 +14,14 @@ class SportsScreen extends StatefulWidget {
 }
 
 class _SportsScreenState extends State<SportsScreen> {
+  final String name = 'Sports';
+  List<CategoriesModel> _dataList = [];
+  bool _isLoading = false;
+
   @override
   void initState() {
     super.initState();
+    _fetchCategoryAPI();
   }
 
   @override
@@ -26,16 +35,20 @@ class _SportsScreenState extends State<SportsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Breaking News',
+                name,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blueGrey),
               ),
               const SizedBox(height: 12),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return NewsCard();
-                  },
+              Visibility(
+                visible: !_isLoading,
+                replacement: Center(child: CircularProgressIndicator()),
+                child: Expanded(
+                  child: ListView.builder(
+                    itemCount: _dataList.length,
+                    itemBuilder: (context, index) {
+                      return NewsCard(news: _dataList[index]);
+                    },
+                  ),
                 ),
               ),
             ],
@@ -44,6 +57,24 @@ class _SportsScreenState extends State<SportsScreen> {
       ),
     );
   }
+
+  Future<void> _fetchCategoryAPI() async {
+    _isLoading = true;
+    setState(() {});
+    final NetworkResponse response = await NetworkCaller().getRequest(Urls.urlsByCategory(name));
+
+    if (response.isSuccess) {
+      List<CategoriesModel> list = [];
+      for (Map<String, dynamic> jsonData in response.body['response']) {
+        list.add(CategoriesModel.fromJson(jsonData));
+      }
+      _dataList = list;
+    } else {
+      _isLoading = false;
+      setState(() {});
+      showCustomSnakbarMessage(context, response.errorMessage ?? 'Data Load Failed', true);
+    }
+    _isLoading = false;
+    setState(() {});
+  }
 }
-
-

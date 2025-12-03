@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:the_daily_globe/ui/screens/business_screen.dart';
 import 'package:the_daily_globe/ui/screens/entertainment_screen.dart';
 import 'package:the_daily_globe/ui/screens/health_screen.dart';
@@ -7,9 +6,6 @@ import 'package:the_daily_globe/ui/screens/politics_screen.dart';
 import 'package:the_daily_globe/ui/screens/sports_screen.dart';
 import 'package:the_daily_globe/ui/screens/travels_screen.dart';
 import 'package:the_daily_globe/ui/screens/weather_screen.dart';
-import 'package:the_daily_globe/ui/widgets/dg_app_bar.dart';
-import 'package:the_daily_globe/ui/widgets/dg_navigation_drawer.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -30,6 +26,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     'Health',
     'Entertainment',
   ];
+
+
   final List<Widget> _screen = [
     SportsScreen(),
     PoliticsScreen(),
