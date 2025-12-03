@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NewsCard extends StatelessWidget {
-  const NewsCard({
-    super.key,
-  });
+  const NewsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,23 +35,28 @@ class NewsCard extends StatelessWidget {
               children: [
                 Text(
                   'Category',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                Text('Artificial Intelligence to help communicate with animals', style: TextStyle(fontSize: 20, color: Colors.black),),
+                Text(
+                  'Artificial Intelligence to help communicate with animals',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Naved Gaoud  . March 9,2025', style: TextStyle(fontSize: 12, color: Colors.grey),),
-                    IconButton(onPressed: (){}, icon: Icon(Icons.share, color: Colors.grey, size: 16,))
+                    Text(
+                      'Naved Gouda  . March 9,2025',
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.share, color: Colors.grey, size: 16),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
