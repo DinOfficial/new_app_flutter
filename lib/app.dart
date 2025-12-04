@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_daily_globe/ui/screens/home_screen.dart';
 import 'package:the_daily_globe/ui/screens/main_bottom_nav_bar.dart';
+import 'package:the_daily_globe/ui/screens/news_details_screen.dart';
 import 'package:the_daily_globe/ui/screens/splash_screen.dart';
 
 class TheDailyGlobeApp extends StatefulWidget {
@@ -20,6 +21,7 @@ class _TheDailyGlobeAppState extends State<TheDailyGlobeApp> {
         SplashScreen().name: (_)=>SplashScreen(),
         HomeScreen().name: (_) => HomeScreen(),
         MainBottomNavBar().name : (_) => MainBottomNavBar(),
+        NewsDetailsScreen().name : (_) => NewsDetailsScreen(),
       },
     );
   }
