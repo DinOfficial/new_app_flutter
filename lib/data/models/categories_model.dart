@@ -1,4 +1,6 @@
 
+import 'package:date_time_format/date_time_format.dart';
+
 class CategoriesModel {
   String? id;
   String? title;
@@ -36,7 +38,7 @@ class CategoriesModel {
       content: json['content'] as Map<String, dynamic>?,
       image: json['image'] != null ? ImageModel.fromJson(json['image']) : null,
       language: json['language'],
-      publishedAt: json['publishedAt'],
+      publishedAt: DateTimeFormat.format(DateTime.parse(json['publishedAt']) , format: 'd - M - y'),
       source: json['source'],
       site: json['site'],
       category: json['category'],

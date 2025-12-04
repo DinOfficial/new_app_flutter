@@ -1,12 +1,17 @@
+
+import 'package:date_time_format/date_time_format.dart';
+
 class NewsDetailModel {
   final String? id;
   final String? title;
   final String? description;
   final Map<String, dynamic>? content;
-  final Map<String, dynamic>? image;
+  final NewsDetailImage? image;
   final String? author;
   final String? publishedAt;
   final String? site;
+  final String? category;
+  final String? source;
 
   NewsDetailModel({
     this.id,
@@ -17,6 +22,8 @@ class NewsDetailModel {
     this.author,
     this.publishedAt,
     this.site,
+    this.category,
+    this.source,
   });
 
   factory NewsDetailModel.fromJson(Map<String, dynamic> json) {
@@ -25,10 +32,26 @@ class NewsDetailModel {
       title: json['title'],
       description: json['description'],
       content: json['content'] as Map<String, dynamic>?,
-      image: json['image'] as Map<String, dynamic>?,
+      image: json['image'] != null ? NewsDetailImage.fromJson(json['image']) : null,
       author: json['author'],
-      publishedAt: json['publishedAt'],
+      publishedAt: DateTimeFormat.format(DateTime.parse(json['publishedAt']) , format: 'd - M - y'),
       site: json['site'],
+      category: json['category'],
+      source: json['source'],
+    );
+  }
+}
+
+class NewsDetailImage {
+  final String? img;
+  final String? alt;
+
+  NewsDetailImage({this.img, this.alt});
+
+  factory NewsDetailImage.fromJson(Map<String, dynamic> json) {
+    return NewsDetailImage(
+      img: json['img'] ?? json['src'],
+      alt: json['alt'],
     );
   }
 }

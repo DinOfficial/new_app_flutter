@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:the_daily_globe/data/models/categories_model.dart';
-import 'package:the_daily_globe/ui/screens/news_details_screen.dart';
+
+import '../screens/news_details_screen.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({super.key, required this.news});
@@ -13,7 +15,11 @@ class NewsCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NewsDetailsScreen(news: news)),
+          MaterialPageRoute(
+            builder: (context) {
+              return NewsDetailsScreen(news: news);
+            },
+          ),
         );
       },
       child: Container(
@@ -29,13 +35,14 @@ class NewsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
               ),
               child: Image.network(
-                news.image?.img ??
-                    'https://library.ceu.edu/wp-content/uploads/news-2444778_960_720.jpg',
+                (news.image?.img != null && news.image!.img!.isNotEmpty)
+                    ? news.image!.img!
+                    : 'https://library.ceu.edu/wp-content/uploads/news-2444778_960_720.jpg',
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -44,6 +51,14 @@ class NewsCard extends StatelessWidget {
                   return const SizedBox(
                     height: 200,
                     child: Center(child: CircularProgressIndicator()),
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.network(
+                    'https://library.ceu.edu/wp-content/uploads/news-2444778_960_720.jpg',
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   );
                 },
               ),
@@ -56,7 +71,9 @@ class NewsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Category: ${(news.category!)}',
+                    (news.category != null && news.category!.isNotEmpty)
+                        ? 'Category: ${(news.category!)}'
+                        : 'Category Not found',
                     style: TextStyle(
                       color: Colors.red,
                       fontSize: 12,
@@ -81,13 +98,16 @@ class NewsCard extends StatelessWidget {
                     children: [
                       Text(
                         'Author: ${news.author ?? "Unknown"} \n'
-                        'Publish Date : ${news.publishedAt}\n'
+                        'Publish Date: ${news.publishedAt}\n'
                         'Source: ${news.site}',
                         style: TextStyle(fontSize: 12, color: Colors.grey),
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          SharePlus.instance.share(ShareParams(uri: Uri.parse(news.source!)));
+                        },
                         icon: Icon(Icons.share, color: Colors.grey, size: 16),
                       ),
                     ],

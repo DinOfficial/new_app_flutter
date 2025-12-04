@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:the_daily_globe/ui/screens/business_screen.dart';
 import 'package:the_daily_globe/ui/screens/entertainment_screen.dart';
 import 'package:the_daily_globe/ui/screens/health_screen.dart';
+import 'package:the_daily_globe/ui/screens/hot_news_screen.dart';
 import 'package:the_daily_globe/ui/screens/politics_screen.dart';
 import 'package:the_daily_globe/ui/screens/sports_screen.dart';
 import 'package:the_daily_globe/ui/screens/travels_screen.dart';
@@ -18,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   final List<String> _tabBar = [
+    '🔥 Hot News',
     'Sports',
     'Politics',
     'Business',
@@ -29,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
 
   final List<Widget> _screen = [
+    HotNewsScreen(),
     SportsScreen(),
     PoliticsScreen(),
     BusinessScreen(),
