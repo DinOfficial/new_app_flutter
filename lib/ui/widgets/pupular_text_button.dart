@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PopularTextButton extends StatelessWidget {
-  const PopularTextButton({
-    super.key, required this.text,
-  });
+  const PopularTextButton({super.key, required this.text, required this.onTap});
 
   final String text;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class PopularTextButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      onPressed: () {},
+      onPressed: onTap,
       child: Text(text, style: TextStyle(color: Colors.blueGrey)),
     );
   }

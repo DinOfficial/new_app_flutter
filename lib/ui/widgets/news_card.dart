@@ -13,14 +13,18 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return NewsDetailsScreen(news: news);
-            },
-          ),
-        );
+        if (news.contentApi != null && news.contentApi!.isNotEmpty) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NewsDetailsScreen(news: news),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Details are not available for this news.')),
+          );
+        }
       },
       child: Container(
         width: double.infinity,

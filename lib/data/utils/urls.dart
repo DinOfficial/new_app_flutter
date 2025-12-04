@@ -3,6 +3,7 @@ class Urls {
   static String token = 'sCXf3aHDy3rdyiHpQ7GRCH';
 
   static String urlsByCategory(String category) => '$_baseUrl/api/news?category=$category&access_key=$token';
+  static String serchNewsUrl(String keyword) => '$_baseUrl/api/news?&access_key=$token&find=$keyword';
   static String newsDetailsById(String contentApi) => contentApi;
 
 }
