@@ -1,8 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:the_daily_globe/ui/widgets/section_title.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:the_daily_globe/data/models/categories_model.dart';
+import 'package:the_daily_globe/data/models/news_details_models.dart';
+import 'package:the_daily_globe/ui/widgets/section_title.dart';
+import 'package:http/http.dart' as http;
 class NewsDetailsScreen extends StatefulWidget {
-  const NewsDetailsScreen({super.key});
+  const NewsDetailsScreen({super.key, required this.news});
+  final CategoriesModel news;
 
   final String name = 'news-details';
 
@@ -11,6 +16,27 @@ class NewsDetailsScreen extends StatefulWidget {
 }
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
+  bool _isLoading = false;
+  late final CategoriesModel newsSummary;
+
+  Future<NewsDetailModel> fetchNewsDetails(String contentApiUrl )async{
+    _isLoading = true;
+    setState(() {});
+
+    final response = await http.get(Uri.parse(contentApiUrl));
+    if(response.statusCode == 200){
+      final data = jsonDecode(response.body);
+      return NewsDetailModel.fromJson(data['response']);
+    }else{
+      throw Exception('Failed to load news details. Status Code : ${response.statusCode}');
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchNewsDetails(widget.news.contentApi!);
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

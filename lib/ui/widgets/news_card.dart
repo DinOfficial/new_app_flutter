@@ -10,7 +10,12 @@ class NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, NewsDetailsScreen().name),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NewsDetailsScreen(news: news)),
+        );
+      },
       child: Container(
         width: double.infinity,
         height: 400,

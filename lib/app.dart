@@ -21,7 +21,6 @@ class _TheDailyGlobeAppState extends State<TheDailyGlobeApp> {
         SplashScreen().name: (_)=>SplashScreen(),
         HomeScreen().name: (_) => HomeScreen(),
         MainBottomNavBar().name : (_) => MainBottomNavBar(),
-        NewsDetailsScreen().name : (_) => NewsDetailsScreen(),
       },
     );
   }
