@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:the_daily_globe/data/helper/string_unescape.dart';
 import 'package:the_daily_globe/data/models/categories_model.dart';
 import 'package:the_daily_globe/ui/screens/news_details_screen.dart';
 
@@ -15,14 +15,12 @@ class SearchNewsCard extends StatelessWidget {
         if (news.contentApi != null && news.contentApi!.isNotEmpty) {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => NewsDetailsScreen(news: news),
-            ),
+            MaterialPageRoute(builder: (context) => NewsDetailsScreen(news: news)),
           );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Details are not available for this news.')),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Details are not available for this news.')));
         }
       },
       child: Card(
@@ -34,13 +32,13 @@ class SearchNewsCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // বাম পাশে ইমেজ
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
-                  news.image?.img ?? 'https://library.ceu.edu/wp-content/uploads/news-2444778_960_720.jpg',
-                  height: 100, // একটি নির্দিষ্ট উচ্চতা
-                  width: 120, // এবং নির্দিষ্ট প্রস্থ
+                  news.image?.img ??
+                      'https://library.ceu.edu/wp-content/uploads/news-2444778_960_720.jpg',
+                  height: 100,
+                  width: 120,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Image.network(
@@ -53,27 +51,20 @@ class SearchNewsCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              // ডান পাশে টেক্সট
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      news.title ?? 'No Title Available',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                      unescape(news.title ?? 'No Title Available'),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       news.publishedAt ?? 'No Date',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                     const SizedBox(height: 4),
                     Text(

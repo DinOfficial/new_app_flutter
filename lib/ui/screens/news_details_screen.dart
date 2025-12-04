@@ -1,14 +1,15 @@
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
+import 'package:the_daily_globe/data/helper/string_unescape.dart';
 import 'package:the_daily_globe/data/models/categories_model.dart';
 import 'package:the_daily_globe/data/models/news_details_models.dart';
 import 'package:the_daily_globe/ui/widgets/section_title.dart';
 
 class NewsDetailsScreen extends StatefulWidget {
   const NewsDetailsScreen({super.key, required this.news});
+
   final CategoriesModel news;
 
   @override
@@ -57,7 +58,10 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         contentWidgets.add(
           Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
-            child: Text(value, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            child: Text(
+              unescape(value),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
           ),
         );
       } else if (key.startsWith('img_') && value is Map) {
@@ -90,9 +94,12 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         title: Text(widget.news.category ?? "News Details"),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {
-            SharePlus.instance.share(ShareParams(uri: Uri.parse(widget.news.source!)));
-          }, icon: Icon(Icons.share)),
+          IconButton(
+            onPressed: () {
+              SharePlus.instance.share(ShareParams(uri: Uri.parse(widget.news.source!)));
+            },
+            icon: Icon(Icons.share),
+          ),
         ],
       ),
       body: FutureBuilder<NewsDetailModel>(
@@ -126,15 +133,17 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                 const SizedBox(height: 12),
                 // Headline
                 Text(
-                  details.title ?? 'No Title Available',
+                  unescape(details.title ?? 'No Title Available'),
                   style: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
                 // Author
                 Text(
-                  'Author: ${details.author ?? "Unknown"}\n'
-                      'Published: ${details.publishedAt ?? "N/A"}\n'
-                      'Source: ${details.site ?? "N/A"}',
+                  unescape(
+                    'Author: ${details.author ?? "Unknown"}\n'
+                    'Published: ${details.publishedAt ?? "N/A"}\n'
+                    'Source: ${details.site ?? "N/A"}',
+                  ),
                   style: TextStyle(fontSize: 12, color: Colors.grey, height: 1.5),
                 ),
                 const SizedBox(height: 12),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:the_daily_globe/data/helper/string_unescape.dart';
 import 'package:the_daily_globe/data/models/categories_model.dart';
 
 import '../screens/news_details_screen.dart';
@@ -16,14 +17,12 @@ class NewsCard extends StatelessWidget {
         if (news.contentApi != null && news.contentApi!.isNotEmpty) {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => NewsDetailsScreen(news: news),
-            ),
+            MaterialPageRoute(builder: (context) => NewsDetailsScreen(news: news)),
           );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Details are not available for this news.')),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Details are not available for this news.')));
         }
       },
       child: Container(
@@ -75,9 +74,11 @@ class NewsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    (news.category != null && news.category!.isNotEmpty)
-                        ? 'Category: ${(news.category!)}'
-                        : 'Category Not found',
+                    unescape(
+                      (news.category != null && news.category!.isNotEmpty)
+                          ? 'Category: ${(news.category!)}'
+                          : 'Category Not found',
+                    ),
                     style: TextStyle(
                       color: Colors.red,
                       fontSize: 12,
@@ -87,7 +88,7 @@ class NewsCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    news.title!,
+                    unescape(news.title!),
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
