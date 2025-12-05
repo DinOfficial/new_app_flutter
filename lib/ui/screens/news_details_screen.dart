@@ -154,7 +154,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                 if (details.source != null)
                   InkWell(
                     onTap: () {
-                      // এখানে URL লঞ্চার ব্যবহার করে লিঙ্কটি খোলা যেতে পারে
                     },
                     child: Text(
                       'Original Source: ${details.source}',
@@ -164,7 +163,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
               ],
             );
           }
-          // যদি কোনো ডেটা না থাকে
           return Center(child: Text('No details found.'));
         },
       ),

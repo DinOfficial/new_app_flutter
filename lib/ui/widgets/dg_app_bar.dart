@@ -9,7 +9,6 @@ class DGAppBar extends StatelessWidget implements PreferredSizeWidget{
       backgroundColor: Colors.transparent,
       title: SvgPicture.asset('assets/images/Logo.svg', height: 20, width: 36),
       centerTitle: true,
-      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.account_circle_outlined))],
     );
   }
 
